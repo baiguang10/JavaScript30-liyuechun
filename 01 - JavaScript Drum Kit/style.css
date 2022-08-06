@@ -24,6 +24,7 @@ html {
   margin: 1rem;
   font-size: 1.5rem;
   padding: 1rem .5rem;
+  /*all是向所有方向扩散，时间为0.07s, 扩散方式为ease，先慢后快后慢*/
   transition: all .07s ease;
   width: 10rem;
   text-align: center;

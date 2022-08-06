@@ -25,6 +25,7 @@
       min-height:100vh;
       overflow: hidden;
       display: flex;
+      overflow: hidden;
     }
 
     .panel {
@@ -87,7 +88,7 @@
     }
 
     .panel1panel1 {
-      color: red;
+      color: #7a0000;
     }
 
   </style>
@@ -130,8 +131,11 @@
     }
 
     function toggleActive(e) {
+      // propertyName 的解释
+      //https://www.jc2182.com/javascript/javascript-html-dom-propertyname-event-attr.html
       console.log(e.propertyName);
       if (e.propertyName.includes('flex')) {
+        console.log('world');
         this.classList.toggle('open-active');
       }
     }

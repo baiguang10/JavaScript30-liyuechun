@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        /* css中的变量定义方式 */
+        :root {
+            --base: #193549;
+            --spacing: 10px;
+            --blur: 10px;
+        }
+        img {
+            width:600px;
+            height: 400px;
+            padding: var(--spacing);
+            background: var(--base);
+            filter: blur(var(--blur))
+        }
+        .hl {
+            color: var(--base);
+        }
+        body {
+            text-align: center;
+            background: #193549;
+            color: white;
+            font-family: 'helvetica neue', sans-serif;
+            font-weight: 100;
+            font-size: 30px;
+        }
+        .controls {
+            margin-bottom: 50px;
+        }
+        input {
+            width:100px;
+        }
+        .result {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            color: var(--base);
+        }
+        .showText {
+            margin: 0 25px 50px 25px;
+        }
+
+    </style>
+</head>
+<body>
+    <h2>Update CSS Variable With<span class="hl">JS</span></h2>
+    <div class="controls">
+        <label for="spacing">Spacing</label>
+        <input id="spacing" type="range" min="10" max="200" value="10" data-sizing="px">
+
+        <label for="blur">Blur</label>
+        <input id="blur" type="range" min="0" max="25" value="0" data-sizing="px">
+
+        <label for="base">Base</label>
+        <input id="base" type="color" value="#ffc600">
+    </div>
+    <div class="result">
+        <div class="showText">{spacing:<label id="label-spacing">#ffc600</label>}</div>
+        <div class="showText">{blur:<label id="label-blur">0</label>}</div>
+        <div class="showText">{base:<label id="label-base">}10</label></div>
+    </div>
+    <img src="http://f.hiphotos.baidu.com/lvpics/h=800/sign=b346032cbe389b5027ffed52b534e5f1/960a304e251f95ca545f8b84ce177f3e6709525d.jpg" alt="背景图">
+
+    <script>
+        const inputs = document.querySelectorAll('.controls input');
+
+        function handleUpdate() {
+            const suffix = this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.id}`, this.value +suffix);
+            document.getElementById(`label-${this.id}`).innerText = this.value + suffix;
+        }
+        inputs.forEach(input => input.addEventListener('change', handleUpdate))
+        inputs.forEach(input => input.addEventListener('mousemove', handleUpdate))
+    </script>
+
+</body>
+</html>

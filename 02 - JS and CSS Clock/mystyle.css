@@ -1,0 +1,103 @@
+html {
+    background: #018DED url(http://unsplash.it/1500/1000?image=881&blur=50);
+    background-size: cover;
+    font-family: 'helvetica neue';
+    /*可以设置子元素的div的居中和大小*/
+    text-align: center;
+    font-size: 10px;
+}
+
+.clock {
+    width: 30rem;
+    height: 30rem;
+    border: 20px solid white;
+    /*是一个简写属性，用来设置四个border角的radius*/
+    border-radius: 100%;
+    margin: 50px auto;
+
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.4);
+    /*h-shadow v-shadow blur(模糊) spread(大小) color inset(从外层)*/
+    /*整个下面是给一个整体*/
+    box-shadow: 0 0 2px 4px rgba(0, 0, 0, 0.1),
+        /*配合上面的position用来定位的*/
+    inset 0 0 1px 2px #EFEFEF,
+    inset 0 0 30px black,
+    0 0 10px 3px rgba(0, 0, 0, 0.2);
+}
+.clock-face {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    /* account for the height of the clock hands */
+}
+
+body {
+    margin: 0;
+    font-size: 2rem;
+    display: flex;
+    min-height: 100vh;
+    align-items: center;
+}
+
+.hand {
+    width: 50%;
+    background: #fff;
+    /*根据父类进行绝对定位，父类用relative定位*/
+    position: absolute;
+    /*配合absolute进行定位，类似margin-top*/
+    top: 50%;
+    right: 50%;
+
+    /*这里很神奇，这个hand控制下面三个子hand的shadow*/
+    box-shadow: 0 0 0 .1px #fff,
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 0 8px rgba(0, 0, 0, 0.4),
+    2px 5px 1px rgba(0, 0, 0, .5);
+    transform-origin: 100% 50%;
+    transform: rotate(90deg);
+
+    /*过渡时函数*/
+    transition-timing-function: cubic-bezier(0.9, 0.54, 0.26, 1.68);
+}
+.clock-face:after {
+    width: 1em;
+    height: 1em;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+    display: block;
+    /*一般有文字空格不会显示，不占地方。*/
+    content: '';
+    background-color: #ff0000;
+    border-radius: 50%;
+    box-shadow: 0 0 0 2px rgba(241, 6, 6, 0.1),
+    0 0 10px rgba(0, 0, 0, 0.2);
+    transform: translate(-50%, -50%);
+    /*transition: all .05s;*/
+}
+
+.hour-hand {
+    width: 40%;
+    height: 10px;
+    margin-top: -5px;
+    border-bottom-left-radius: .5em;
+    border-top-left-radius: .5em;
+    transition: all 3s;
+}
+
+.min-hand {
+    width: 45%;
+    height: 5px;
+    margin-top: -2.5px;
+    transition: all .1s;
+}
+
+.second-hand {
+    height: 2px;
+    margin-top: -1px;
+    border-bottom-left-radius: 100%;
+    border-top-left-radius: 100%;
+    transition: all .05s;
+    background-color: red;
+}
