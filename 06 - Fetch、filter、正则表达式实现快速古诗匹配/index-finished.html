@@ -32,6 +32,7 @@
       })
       .then(data => {
         console.log(data);
+        // js中的扩展运算符，和js中的剩余运算符长得一模一样，不过剩余运算符用在函数定义语句的变长参数中。
         poetrys.push(...data);
         console.log(poetrys);
       });
@@ -42,20 +43,31 @@
       return poetrys.filter(poet => {
         // 正则找出匹配的诗句
         const regex = new RegExp(wordToMatch, 'gi');
+        // 这里装作者的数据时数组
         const author = poet.detail_author.join('');
-        //			console.log(author);
+        console.log(author);
         return poet.detail_text.match(regex) || poet.title.match(regex) || author.match(regex);
       });
     }
 
     function displayMatches() {
+      console.log('1');
       const matches = findMatches(this.value, poetrys);
+      // 该正则表达是在下面replace起到的作用和 regex = this.value相同
       const regex = new RegExp(this.value, 'gi');
+      console.log(regex);
       const html = matches.map(poet => {
         // 替换高亮的标签
         const text = poet.detail_text.replace(regex, `<span class="hl">${ this.value }</span>`);
         const title = poet.title.replace(regex, `<span class="hl">${ this.value }</span>`);
-        const detail_author = poet.detail_author[0].replace(regex, `<span class="hl">${ this.value }</span>`);
+        let detail_author;
+
+        if (this.value !== undefined && poet.detail_author.length !== 0) {
+          console.log(this.value);
+          console.log(poet.detail_author);
+          detail_author = poet.detail_author[0].replace(regex, `<span class="hl">${ this.value }</span>`);
+        }
+
         // 构造 HTML 值
         return `
       <li>
